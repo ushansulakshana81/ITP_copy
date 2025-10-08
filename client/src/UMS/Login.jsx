@@ -37,51 +37,93 @@ function Login({ onLoginSuccess }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     console.group("🔐 Login Flow");
-    console.log("1️⃣ Submitting login:", { email, password });
-  
+
     try {
-      console.log("2️⃣ Sending POST request to /api/login ...");
+      console.log("Submitting login:", { email, password });
+
       const res = await fetch("http://localhost:5002/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
-      console.log("3️⃣ Response status:", res.status);
+
+      console.log("Response status:", res.status);
       const data = await res.json();
-      console.log("4️⃣ Response data:", data);
-  
-      if (res.ok) {
-        setMessage("Login successful ✅");
+      console.log("Response data:", data);
 
-        console.log("5️⃣ Saving token and userId to localStorage...");
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userId", data.userId || data.user?.id);
-
-        const storedToken = localStorage.getItem("token");
-        const storedUserId = localStorage.getItem("userId");
-        console.log("🧭 Token stored:", storedToken ? "✅ Yes" : "❌ No");
-        console.log("🧭 User ID stored:", storedUserId ? storedUserId : "❌ Missing");
-
-        console.log("6️⃣ Navigating to /dashboard ...");
-        // navigate("/Dashboard");
-        onLoginSuccess();
-        console.log("navigated");
-
-        console.log("✅ Navigation called successfully");
-        console.groupEnd();
-
-      } else {
+      if (!res.ok) {
         console.warn("⚠️ Login failed:", data.message);
         setMessage(data.message || "Invalid credentials");
         console.groupEnd();
+        return;
       }
+
+      // ✅ Successful login
+      const role = data.user?.role || data.role; // fallback if needed
+      const userId = data.user?._id || data.userId;
+
+      console.log("Role from API:", role);
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.userId || data.user?.id);
+      localStorage.setItem("role", role);
+      console.log("User object:", data.user);
+      console.log("User role:", data.user?.role);
+      onLoginSuccess(role);
+      if (!role) {
+        console.error("❌ No role found in response!");
+        alert("No role assigned to this user.");
+        return;
+      }
+
+      console.log("🔁 Invoking role-based redirect...");
+      console.log("typeof onLoginSuccess:", typeof onLoginSuccess);
+
+      // switch (role) {
+      //   case "admin":
+      //     onLoginSuccess("/adminPanel");
+      //     break;
+      //   case "Vehicle Manager":
+      //     onLoginSuccess("/vehicleAppointment");
+      //     break;
+      //   case "Cashier":
+      //     onLoginSuccess("/cashier");
+      //     break;
+      //   case "Purchase Officer":
+      //     onLoginSuccess("/purchasing");
+      //     break;
+      //   case "Other":
+      //     onLoginSuccess("/myProfile");
+      //     break;
+      //   default:
+      //     console.error("⚠️ Unknown role:", role);
+      //     alert("Unknown login user role!");
+      // }
+      if (role == "admin") {
+        onLoginSuccess("admin");
+        navigate("/adminPanel");
+      }
+      if (role == "Other" || role == "User") {
+        onLoginSuccess("admin");
+        navigate("/myProfile");
+      }
+      if (role == "admin") {
+        onLoginSuccess("admin");
+        navigate("/adminPanel");
+      }
+      if (role == "admin") {
+        onLoginSuccess("admin");
+        navigate("/adminPanel");
+      }
+      console.log("✅ Role switch executed successfully");
     } catch (err) {
       console.error("🚨 Login error:", err);
-      setMessage("⚠️ Error connecting to server");
+      setMessage("Error connecting to server");
+    } finally {
       console.groupEnd();
     }
   };
+
 
   // Determine message color based on content
   const getMessageColor = () => {

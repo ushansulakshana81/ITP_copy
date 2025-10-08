@@ -1,0 +1,113 @@
+/* Import Tailwind's base, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom components using Tailwind's @layer directive */
+@layer components {
+  .card {
+    @apply p-4 border rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow;
+  }
+
+  .btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400 transition-colors;
+  }
+
+  .btn-success {
+    @apply bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 disabled:bg-gray-400 transition-colors;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 disabled:bg-gray-400 transition-colors;
+  }
+
+  .form-input {
+    @apply w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  }
+
+  .form-label {
+    @apply block font-medium text-gray-700 mb-1;
+  }
+}
+
+/* Keep some custom styles if needed */
+.App {
+  @apply min-h-screen flex flex-col;
+}
+
+.App-header {
+  @apply bg-gray-800 text-white p-4 shadow-md;
+}
+
+.App-header h1 {
+  @apply m-0 mb-4 text-2xl font-bold;
+}
+
+.nav-menu {
+  @apply list-none p-0 m-0 flex gap-6 flex-wrap;
+}
+
+.nav-menu li {
+  @apply m-0;
+}
+
+.nav-menu a {
+  @apply text-blue-400 no-underline font-medium transition-colors hover:text-blue-300;
+}
+
+.App-main {
+  @apply flex-1 p-8 max-w-7xl mx-auto w-full;
+}
+
+.home {
+  @apply text-center p-12 bg-white rounded-lg shadow-md;
+}
+
+.home h2 {
+  @apply text-gray-800 mb-4 text-3xl;
+}
+
+.home p {
+  @apply text-gray-600 text-xl;
+}
+
+.list-container {
+  @apply bg-white p-8 rounded-lg shadow-md;
+}
+
+.list-container h2 {
+  @apply mt-0 text-gray-800 text-2xl mb-6;
+}
+
+.error {
+  @apply text-red-700 bg-red-100 p-4 rounded mb-4 border border-red-200;
+}
+
+.success {
+  @apply text-green-700 bg-green-100 p-4 rounded mb-4 border border-green-200;
+}
+
+.loading {
+  @apply text-center p-8 text-gray-600;
+}
+
+/* Table Styles with Tailwind */
+table {
+  @apply w-full border-collapse bg-white rounded-lg overflow-hidden shadow-md;
+}
+
+th {
+  @apply bg-gray-800 text-white p-4 text-left font-semibold;
+}
+
+td {
+  @apply p-4 border-b border-gray-200;
+}
+
+tr:hover {
+  @apply bg-gray-50;
+}
+
+tr:last-child td {
+  @apply border-b-0;
+}
