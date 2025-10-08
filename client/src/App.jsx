@@ -18,7 +18,7 @@ import Login from "./UMS/Login.jsx";
 import AdminPanel from "./AdminPanel.jsx";
 import MyProfile from "./UMS/MyProfile.jsx";
 import NotFound from "./pages/not-found.jsx";
-
+import VehicleAppointment from "../src/vehicleAppointment/frontEnd/vehicleAppointments/components/sideBar.jsx"
 // Styles
 import './App.css';
 
@@ -58,7 +58,17 @@ function App() {
                   )
                 }
               />
-
+              {/* vhicle appointment route */}
+              <Route
+                path="/vehicleAppointment"
+                element={
+                  userRole === "vehicleAppointment" ? (
+                    <VehicleAppointment userId={localStorage.getItem("userId")} onLogout={handleLogout} />
+                  ) : (
+                    <Navigate to="/login" replace />
+                  )
+                }
+              />
               {/* My profile route */}
               <Route
                 path="/myProfile"

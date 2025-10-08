@@ -103,17 +103,21 @@ function Login({ onLoginSuccess }) {
         onLoginSuccess("admin");
         navigate("/adminPanel");
       }
-      if (role == "Other" || role == "User") {
-        onLoginSuccess("admin");
+      if (role == "Other" || role === "User") {
+        onLoginSuccess("user");
         navigate("/myProfile");
       }
-      if (role == "admin") {
-        onLoginSuccess("admin");
+      if (role == "seller") {
+        onLoginSuccess("seller");
         navigate("/adminPanel");
       }
-      if (role == "admin") {
-        onLoginSuccess("admin");
+      if (role == "purchasing") {
+        onLoginSuccess("purchasing");
         navigate("/adminPanel");
+      }
+      if (role == "vehicleAppointment") {
+        onLoginSuccess("vehicleAppointment");
+        navigate("/vehicleAppointment");
       }
       console.log("✅ Role switch executed successfully");
     } catch (err) {
