@@ -1,33 +1,33 @@
-import {defineConfig} from 'vite'
-import react from '@vitejs/plugin-react'
-import path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// https://vite.dev/config/
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export default defineConfig({
-    plugins: [
-        react({
-            babel: {
-                plugins: [['babel-plugin-react-compiler']],
-            },
-        }),
-    ],
-    resolve: {
-        alias: {
-            "@": path.resolve(import.meta.dirname, "client", "src"),
-            "@shared": path.resolve(import.meta.dirname, "shared"),
-        },
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "client", "src"),
+      "@shared": path.resolve(__dirname, "shared"),
     },
-    root: path.resolve(import.meta.dirname, "client"),
-    build: {
-        outDir: path.resolve(import.meta.dirname, "dist/public"),
-        emptyOutDir: true,
+  },
+  root: path.resolve(__dirname, "client"),
+  build: {
+    outDir: path.resolve(__dirname, "dist/public"),
+    emptyOutDir: true,
+  },
+  server: {
+    host: "0.0.0.0",
+    port: 5000,
+    proxy: {
+      '/api': 'http://localhost:5002', // adjust if backend is on a different port
     },
-    server: {
-        host: "0.0.0.0",
-        port: 5000,
-        fs: {
-            strict: true,
-            deny: ["**/.*"],
-        },
+    fs: {
+      strict: true,
+      deny: ["**/.*"],
     },
-})
+  },
+});
