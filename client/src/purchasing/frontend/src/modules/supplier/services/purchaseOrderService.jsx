@@ -10,7 +10,7 @@ import axios from "axios";
 
 // Base API URL for purchase order endpoints
 // Note: Backend uses "/api/purchase-orders" (kebab-case)
-const API_URL = "http://localhost:5000/api/purchase-orders";
+const API_URL = "http://localhost:5002/api/purchase-orders";
 
 /**
  * Fetch all purchase orders from the database

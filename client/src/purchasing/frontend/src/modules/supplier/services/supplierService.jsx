@@ -9,7 +9,7 @@
 import axios from "axios";
 
 // Base API URL for supplier endpoints
-const API_URL = "http://localhost:5000/api/suppliers";
+const API_URL = "http://localhost:5002/api/suppliers";
 
 /**
  * Fetch all suppliers from the database

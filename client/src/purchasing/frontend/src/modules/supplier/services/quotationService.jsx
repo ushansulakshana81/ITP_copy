@@ -1,6 +1,6 @@
 // Quotation Service - Handles all API calls related to quotations
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "http://localhost:5002/api";
 
 /**
  * Create a new quotation request

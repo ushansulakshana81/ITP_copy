@@ -111,9 +111,9 @@ function Login({ onLoginSuccess }) {
         onLoginSuccess("seller");
         navigate("/adminPanel");
       }
-      if (role == "purchasing") {
-        onLoginSuccess("purchasing");
-        navigate("/adminPanel");
+      if (role == "PurchaseOfficer") {
+        onLoginSuccess("PurchaseOfficer");
+        navigate("/purchasing");
       }
       if (role == "vehicleAppointment") {
         onLoginSuccess("vehicleAppointment");

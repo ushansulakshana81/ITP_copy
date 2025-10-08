@@ -7,7 +7,7 @@
 
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/parts";
+const API_URL = "http://localhost:5002/api/parts";
 
 /**
  * Get all parts

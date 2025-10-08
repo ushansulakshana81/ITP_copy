@@ -27,10 +27,10 @@ import {
 } from "react-icons/fi";
 
 // Import services to fetch data
-import supplierService from "../services/supplierService";
-import partService from "../services/partService";
-import purchaseOrderService from "../services/purchaseOrderService";
-import { getAllQuotations } from "../services/quotationService";
+import supplierService from "../services/supplierService.jsx";
+import partService from "../services/partService.jsx";
+import purchaseOrderService from "../services/purchaseOrderService.jsx";
+import { getAllQuotations } from "../services/quotationService.jsx";
 
 /**
  * Dashboard Page Component
